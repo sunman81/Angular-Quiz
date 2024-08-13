@@ -1,0 +1,27 @@
+<div class="quiz">
+  @if(quizService.showResults()){
+  <div class="results">
+    <div class="congratulations">Congratulations</div>
+    <div class="results-info">
+      <div>You have completed the quiz.</div>
+      <div>
+        You have got {{ quizService.correctAnswersCount() }} of
+        {{ quizService.questions().length }} right.
+      </div>
+    </div>
+    <div class="next-button" (click)="quizService.restart()">Restart</div>
+  </div>
+  } @if(!quizService.showResults() && quizService.questions().length > 0){
+  <div>
+    <div class="score">
+      Question {{ quizService.currentQuestionIndex() + 1 }}/{{
+        quizService.questions().length
+      }}
+    </div>
+    <quiz-question />
+    <div (click)="quizService.goToNextQuestion()" class="next-button">
+      Next question
+    </div>
+  </div>
+  }
+</div>
